@@ -1,0 +1,9 @@
+node_modules
+config
+src
+tsconfig.json
+.editorconfig
+.gitignore
+**/.gitkeep
+public
+.secrets

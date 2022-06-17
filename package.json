@@ -1,0 +1,30 @@
+{
+  "name": "@kuvira/pckg",
+  "version": "0.0.1",
+  "main": "dist/pckg.js",
+  "module": "dist/ems/pckg.js",
+  "types": "dist/types/index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ixmael/pckg"
+  },
+  "scripts": {
+    "build": "yarn run clean && yarn run build:types && rollup -c config/rollup/production.js --environment INCLUDE_DEPS,BUILD:production",
+    "publish": "yarn publish --access public",
+    "build:types": "yarn run clean:types && tsc -p config/typescript/types.json",
+    "develop:server": "NODE_ENV=development rollup -w -c config/rollup/develop.js --environment INCLUDE_DEPS,BUILD:development",
+    "clean": "yarn run clean:types && npm run clean:ems && rimraf dist/pckg.js dist/pckg.js.map",
+    "clean:ems": "rimraf dist/ems",
+    "clean:types": "rimraf dist/types"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.75.6",
+    "rollup-plugin-serve": "^1.1.0",
+    "rollup-plugin-typescript2": "^0.32.1",
+    "rollup-plugin-uglify": "^6.0.4",
+    "typescript": "^4.7.3"
+  }
+}
