@@ -20,7 +20,7 @@ jobs:
         run: yarn run build
       - name: Publish the npm package
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
         run: yarn run publish
       # - uses: borales/actions-yarn@v3.0.0
       #   with:
