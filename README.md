@@ -1,0 +1,2 @@
+# pckg
+Test package.
