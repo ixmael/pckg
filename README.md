@@ -1,2 +1,2 @@
 # pckg
-Test package.
+Test to build an NMP package with github actions.
