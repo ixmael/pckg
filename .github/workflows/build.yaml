@@ -23,16 +23,31 @@ jobs:
       #     scope: "@kuviraio"
       # - name: Install Yarn
       #   run: npm install -g yarn
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - id: Create the .npmrc file
+
+      # - name: Install dependencies
+      #   run: npm install
+      # - name: Build
+      #   run: npm run build
+
+      - id: Create a .npmrc file
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        run: echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > .npmrc
-      - name: Publish package on NPM 📦
-        run: npm publish --access public
+        run: echo ${{ github.workspace }}
+        # run: |
+        #   ls ${{ github.workspace }}
+        #   cat ${{ github.workspace }}/.npmrc
+        #   echo $NPM_CONFIG_USERCONFIG
+
+      # touch ${{ github.workspace }}/.npmrc
+      # echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" >> ${{ github.workspace }}/.npmrc
+      # - name: Publish package on NPM 📦
+      #   run: npm publish --access public
+
+        # env:
+        #   NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        # run: |
+        #   npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
+        #   npm publish --access public
       #   env:
       #     NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       # - name: Set
