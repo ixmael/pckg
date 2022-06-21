@@ -12,20 +12,36 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-      - name: Install Yarn
-        run: npm install -g yarn
-      - name: Install dependencies
-        run: yarn install
-      - name: Build
-        run: yarn run build
-      - name: Publish the npm package
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-        run: yarn run publish
-      # - uses: borales/actions-yarn@v3.0.0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      # - uses: actions/setup-node@v3
       #   with:
-      #     cmd: install # will run `yarn install` command
-      # - uses: borales/actions-yarn@v3.0.0
-      #   run: build
-      # - name: Deploy package
-      #   run: yarn run publish
+      #     node-version: '14.x'
+      #     registry-url: 'https://registry.npmjs.org'
+      #     scope: "@kuviraio"
+      # - name: Install Yarn
+      #   run: npm install -g yarn
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - id: Create the .npmrc file
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > .npmrc
+      - name: Publish package on NPM 📦
+        run: npm publish --access public
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      # - name: Set
+      #   env:
+      #     NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      #   run: npm config set '//registry.npmjs.org/:_authToken' "${NPM_AUTH_TOKEN}"
+      # - name: Publish the npm package
+      #   env:
+      #     NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      #   run: npm publish --access public
+      # env:
+      #   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

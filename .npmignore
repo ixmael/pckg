@@ -4,6 +4,9 @@ src
 tsconfig.json
 .editorconfig
 .gitignore
+.github
 **/.gitkeep
 public
 .secrets
+.npmrc
+.env
