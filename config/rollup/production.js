@@ -1,13 +1,13 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from "rollup-plugin-terser";
 
 import generateConfiguration from './common';
 
 const path = 'dist';
 const base = generateConfiguration(path);
 
-base[0].plugins.push(uglify());
+base[0].plugins.push(terser());
 
 const moduleConfig = {
   input: 'src/index.ts',
@@ -25,7 +25,7 @@ const moduleConfig = {
     typescript({
       tsconfig: 'config/typescript/esm.json',
     }),
-    uglify(),
+    terser(),
   ],
 };
 
